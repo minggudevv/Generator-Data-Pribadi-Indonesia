@@ -1,0 +1,14 @@
+{
+    "emailDomains": ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com"],
+    "perusahaan": [
+        "PT Maju Bersama",
+        "CV Karya Utama",
+        "PT Indo Teknologi",
+        "PT Mega Persada",
+        "PT Sinar Jaya",
+        "CV Digital Solusi",
+        "PT Global Nusantara",
+        "PT Bumi Sejahtera"
+    ],
+    "passwordChars": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*"
+}

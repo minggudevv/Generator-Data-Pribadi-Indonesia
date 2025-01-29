@@ -1,0 +1,20 @@
+{
+    "lokasi": {
+        "Jakarta": {
+            "jalan": ["Sudirman", "Thamrin", "Gatot Subroto", "Rasuna Said", "Kuningan"],
+            "rumahSakit": ["RS Jakarta Hospital", "RS Medistra", "RSPAD Gatot Soebroto"],
+            "sekolah": ["SMAN 1 Jakarta", "SMAN 3 Jakarta", "SMAN 6 Jakarta"],
+            "universitas": ["Universitas Indonesia", "Universitas Trisakti"],
+            "perusahaan": ["PT Bank Central Asia", "PT Pertamina", "PT Telkom Indonesia"],
+            "provinsi": "DKI Jakarta"
+        },
+        "Yogyakarta": {
+            "jalan": ["Malioboro", "Parangtritis", "Gejayan", "Kaliurang", "Prawirotaman"],
+            "rumahSakit": ["RS Panembahan Senopati", "RS Bethesda", "RS Panti Rapih"],
+            "sekolah": ["SMAN 1 Yogyakarta", "SMAN 3 Yogyakarta"],
+            "universitas": ["Universitas Gadjah Mada", "Universitas Negeri Yogyakarta"],
+            "perusahaan": ["PT Madubaru", "PT Dagadu Djokdja"],
+            "provinsi": "DI Yogyakarta"
+        }
+    }
+}

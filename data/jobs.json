@@ -1,0 +1,20 @@
+{
+    "profesi": {
+        "Dokter": {
+            "tempat": "rumahSakit",
+            "jabatan": ["Dokter Umum", "Dokter Spesialis", "Dokter Bedah", "Dokter Anak"]
+        },
+        "Guru": {
+            "tempat": "sekolah",
+            "jabatan": ["Guru Matematika", "Guru Biologi", "Guru Bahasa", "Guru Fisika"]
+        },
+        "Dosen": {
+            "tempat": "universitas",
+            "jabatan": ["Dosen Fakultas Teknik", "Dosen Fakultas Ekonomi", "Dosen Fakultas Kedokteran"]
+        },
+        "Karyawan": {
+            "tempat": "perusahaan",
+            "jabatan": ["Staff Marketing", "Manager Keuangan", "HRD Manager", "IT Manager"]
+        }
+    }
+}

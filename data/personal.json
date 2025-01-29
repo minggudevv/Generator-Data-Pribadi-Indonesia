@@ -1,0 +1,6 @@
+{
+    "pekerjaan": ["Guru", "Dokter", "Programmer", "Wiraswasta", "Pengacara", "Arsitek", "Akuntan", "Polisi", "PNS", "Dosen"],
+    "gender": ["Laki-laki", "Perempuan"],
+    "bankNames": ["BCA", "Mandiri", "BNI", "BRI", "CIMB Niaga"],
+    "providers": ["0812", "0813", "0857", "0878", "0896", "0898"]
+}
