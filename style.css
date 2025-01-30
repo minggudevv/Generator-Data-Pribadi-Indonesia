@@ -1,166 +1,239 @@
 :root {
-    --primary-color: #2563eb;
-    --secondary-color: #1e40af;
-    --background-color: #f8fafc;
-    --card-background: #ffffff;
-    --text-primary: #1e293b;
-    --text-secondary: #64748b;
+    --primary: #2563eb;
+    --primary-dark: #1e40af;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+    --success: #22c55e;
 }
 
 body {
-    background-color: var(--background-color);
     margin: 0;
-    padding: 0;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    padding: 20px;
+    background: var(--bg-main);
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
 }
 
 .container {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 1rem;
-    font-family: Arial, sans-serif;
-    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.result-box {
-    background-color: var(--card-background);
-    border-radius: 16px;
-    padding: 2rem;
-    margin: 1rem 0;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.controls {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+input[type="number"] {
+    width: 80px;
+    padding: 8px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
 }
 
 button {
-    background-color: var(--primary-color);
+    position: relative;
+    padding: 12px 24px;
+    background: var(--primary);
     color: white;
-    padding: 1rem 2rem;
     border: none;
     border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
+    font-size: 16px;
     font-weight: 500;
-    width: 100%;
-    max-width: 300px;
-    margin: 2rem auto;
-    display: block;
-    transition: background-color 0.2s;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
 button:hover {
-    background-color: var(--secondary-color);
+    background: var(--primary-dark);
 }
 
 button:disabled {
-    background-color: var(--text-secondary);
-    cursor: not-allowed;
     opacity: 0.7;
+    cursor: not-allowed;
 }
 
-h1 {
-    color: var(--text-primary);
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 2rem;
+.loader {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #ffffff3d;
+    border-top: 3px solid white;
+    border-radius: 50%;
+    position: absolute;
+    right: 10px;
+    animation: spin 1s linear infinite;
 }
 
-h2 {
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.5rem;
+button.loading .loader {
+    display: block;
 }
 
-p {
-    color: var(--text-primary);
-    font-size: 1rem;
-    margin: 0.5rem 0;
-    white-space: pre-line;
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-#kartuKredit {
-    background: linear-gradient(135deg, #1e293b, #334155);
-    color: white;
-    padding: 1.5rem;
-    border-radius: 12px;
-    font-family: monospace;
+.profile-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    transition: all 0.3s;
 }
 
-#kartuKredit p {
-    color: white;
-    margin: 0.5rem 0;
-    font-size: 0.875rem;
-    user-select: all;
-}
-
-.profile-section {
-    grid-column: 1 / -1;
+.profile-header {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    text-align: center;
-    margin-bottom: 2rem;
+    gap: 20px;
+    margin-bottom: 24px;
 }
 
 .profile-photo {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid var(--primary-color);
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    border: 3px solid var(--primary);
 }
 
-.data-group {
-    padding: 1rem;
-    background-color: #f8fafc;
+.profile-info h2 {
+    margin: 0;
+    font-size: 24px;
+    color: var(--text);
+}
+
+.gender-age {
+    margin: 4px 0 0;
+    color: var(--text-light);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.info-section {
+    background: var(--bg-main);
+    padding: 16px;
     border-radius: 12px;
-    transition: transform 0.2s;
 }
 
-.data-group:hover {
-    transform: translateY(-2px);
+.info-section h3 {
+    margin: 0 0 16px;
+    font-size: 16px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
-#password {
-    font-family: monospace;
-    background: #eee;
-    padding: 5px 10px;
-    border-radius: 4px;
+.info-item {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
-#ip {
-    font-family: monospace;
-}
-
-.copy-button {
-    background-color: var(--text-secondary);
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    cursor: pointer;
-    margin-left: 0.5rem;
+.info-item label {
+    font-size: 14px;
+    color: var(--text-light);
 }
 
 .selectable {
     cursor: pointer;
-    padding: 2px 6px;
+    padding: 4px 8px;
+    background: var(--bg-card);
     border-radius: 4px;
-    transition: background-color 0.2s;
+    transition: all 0.2s;
 }
 
 .selectable:hover {
-    background-color: rgba(37, 99, 235, 0.1);
+    background: var(--primary);
+    color: white;
 }
 
-.selected {
-    background-color: rgba(37, 99, 235, 0.2);
+.copied {
+    background: var(--success);
+    color: white;
 }
 
-span[id], p[id]:not(#kartuKredit) {
-    user-select: all;
+.credit-card {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #1e293b, #334155);
+    color: white;
+}
+
+.profile-card.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.profile-card.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--bg-main);
+    border-top: 4px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loading-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+@media (max-width: 768px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.anak-list {
+    margin-top: 0.5rem;
+}
+
+.anak-item {
+    padding: 4px 8px;
+    margin: 2px 0;
+    border-radius: 4px;
+    background: var(--bg-card);
+    font-size: 0.9rem;
+}
+
+.anak-item:hover {
+    background: var(--primary);
+    color: white;
 }

@@ -2,5 +2,15 @@
     "pekerjaan": ["Guru", "Dokter", "Programmer", "Wiraswasta", "Pengacara", "Arsitek", "Akuntan", "Polisi", "PNS", "Dosen"],
     "gender": ["Laki-laki", "Perempuan"],
     "bankNames": ["BCA", "Mandiri", "BNI", "BRI", "CIMB Niaga"],
-    "providers": ["0812", "0813", "0857", "0878", "0896", "0898"]
+    "providers": ["0812", "0813", "0857", "0878", "0896", "0898"],
+    "statusPernikahan": [
+        "Belum Menikah",
+        "Menikah",
+        "Duda",
+        "Janda"
+    ],
+    "namaAnak": {
+        "laki": ["Adam", "Aditya", "Akbar", "Bagas", "Dani", "Fajar", "Gibran", "Haikal"],
+        "perempuan": ["Alya", "Bella", "Cinta", "Dinda", "Farah", "Gadis", "Hana", "Indah"]
+    }
 }

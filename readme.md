@@ -1,29 +1,69 @@
-# Generator Data Pribadi Indonesia
+# 🇮🇩 Generator Data Pribadi Indonesia
 
-Aplikasi web sederhana untuk menghasilkan data pribadi fiktif dalam konteks Indonesia.
+<div align="center">
+  <img src="screenshots/preview.png" alt="Preview Generator" width="600">
+  <img src="screenshots/preview2.png">
+  
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  ![Version](https://img.shields.io/badge/version-1.2.0-blue)
+  ![Status](https://img.shields.io/badge/status-active-success.svg)
+</div>
 
-## Fitur
+## ✨ Fitur Utama
 
-- Menghasilkan data pribadi lengkap termasuk:
-    - Nama lengkap (sesuai gender)
-    - Foto profil
-    - Username dan email
-    - Nomor telepon
-    - Alamat lengkap
-    - Informasi pekerjaan
-    - Data kartu kredit (fiktif)
-    - Password dan IP address
+🔥 **Generasi Data Lengkap**
+- Nama lengkap sesuai gender
+- Foto profil yang sesuai umur & gender
+- Username & email yang unik
+- Alamat lengkap & valid
+- Data pekerjaan yang realistis
+- Kartu kredit (data fiktif)
+- Status pernikahan & data keluarga
 
-## Teknologi
+🎯 **Fitur Spesial**
+- Multiple profile generation (1-10 profil)
+- Copy dengan double-click
+- Loading animation yang smooth
+- Responsive design
+- Error handling yang baik
 
-- HTML
-- CSS
-- JavaScript (Vanilla)
-- REST API (randomuser.me untuk foto profil)
+## 🖥️ Preview
 
-## Instalasi
+<div align="center">
+  <img src="screenshots/ui-1.png" alt="UI Preview 1" width="400">
+  <img src="screenshots/ui-2.png" alt="UI Preview 2" width="400">
+</div>
 
-1. Clone repository ini
+## 🚀 Penggunaan
+
+1. Generate satu atau lebih profil:
+   ```
+   Pilih jumlah profil (1-10) → Klik "Generate Data"
+   ```
+
+2. Copy data dengan mudah:
+   ```
+   Double-click pada item yang ingin di-copy
+   ```
+
+3. Data yang dihasilkan termasuk:
+   - Profil lengkap
+   - Informasi keluarga
+   - Data pekerjaan
+   - Alamat valid
+   - Media sosial
+   - Kartu kredit (fiktif)
+
+## 🛠️ Teknologi
+
+- HTML5
+- CSS3 (Flexbox & Grid)
+- Vanilla JavaScript
+- [RandomUser.me API](https://randomuser.me)
+
+## 📦 Instalasi
+
+1. Clone repository:
 ```bash
 git clone https://github.com/username/generator-data-pribadi.git
 ```
@@ -35,11 +75,11 @@ cd generator-data-pribadi
 
 3. Jalankan dengan live server atau buka langsung file `index.html` di browser
 
-## Penggunaan
+## Known Issues
 
-- Klik tombol "Generate Data Baru" untuk menghasilkan set data baru
-- Double click pada data untuk menyalin ke clipboard
-- Data yang dihasilkan bersifat fiktif dan hanya untuk keperluan testing
+- API randomuser.me terkadang lambat
+- Beberapa foto profil mungkin tidak 100% sesuai dengan umur
+- Loading time bisa lama untuk multiple generations
 
 ## Data
 

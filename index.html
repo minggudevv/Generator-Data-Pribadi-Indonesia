@@ -6,118 +6,316 @@
     <title>Generator Data Pribadi Indonesia</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        function checkDataLoaded() {
+            const loadingMessage = document.createElement('div');
+            loadingMessage.textContent = 'Loading data...';
+            loadingMessage.className = 'loading-message';
+            document.body.appendChild(loadingMessage);
+            
+            return new Promise((resolve) => {
+                const checkInterval = setInterval(() => {
+                    if (window.generateDataLengkap) {
+                        clearInterval(checkInterval);
+                        document.body.removeChild(loadingMessage);
+                        resolve(true);
+                    }
+                }, 100);
+            });
+        }
+
+        // Initialize after making sure script is loaded
+        window.addEventListener('load', async () => {
+            await checkDataLoaded();
+            initialize();
+        });
+    </script>
 </head>
 <body>
     <div class="container">
-        <h1>Generator Data Pribadi Indonesia</h1>
-        
-        <div class="result-box">
-            <div class="profile-section">
-                <img id="foto" alt="Profile Photo" class="profile-photo">
-                <h2 id="nama" class="selectable" style="font-size: 1.5rem; color: var(--text-primary);"></h2>
+        <header>
+            <h1>Generator Data Pribadi Indonesia</h1>
+            <div class="controls">
+                <div class="input-group">
+                    <label for="generateCount">Jumlah Profil:</label>
+                    <input type="number" id="generateCount" min="1" max="10" value="1">
+                </div>
+                <button onclick="generateData()" id="generateBtn">
+                    <span class="btn-text">Generate Data</span>
+                    <span class="loader"></span>
+                </button>
             </div>
+        </header>
 
-            <div class="data-group">
-                <h2>Informasi Pribadi</h2>
-                <p><strong>Username:</strong> <span id="username" class="selectable"></span></p>
-                <p><strong>Email:</strong> <span id="email" class="selectable"></span></p>
-                <p><strong>Jenis Kelamin:</strong> <span id="gender" class="selectable"></span></p>
-                <p><strong>No. Telp:</strong> <span id="telepon" class="selectable"></span></p>
-            </div>
-
-            <div class="data-group">
-                <h2>Pekerjaan</h2>
-                <p><strong>Perusahaan:</strong> <span id="perusahaan"></span></p>
-                <p><strong>Jabatan:</strong> <span id="pekerjaan"></span></p>
-            </div>
-
-            <div class="data-group">
-                <h2>Alamat</h2>
-                <p id="alamat"></p>
-                <p><strong>IP Address:</strong> <span id="ip"></span></p>
-            </div>
-
-            <div class="data-group">
-                <h2>Kredensial</h2>
-                <p><strong>Password:</strong> <span id="password"></span></p>
-                <div id="kartuKredit"></div>
-            </div>
-        </div>
-
-        <button onclick="generateData()" id="generateBtn">Generate Data Baru</button>
+        <main id="profiles-container">
+            <!-- Profiles will be generated here -->
+        </main>
     </div>
 
-    <script src="generator.js"></script>
+    <template id="profile-template">
+        <div class="profile-card">
+            <div class="profile-header">
+                <img class="profile-photo" id="foto" alt="Foto Profil">
+                <div class="profile-info">
+                    <h2 id="nama" class="selectable"></h2>
+                    <p class="gender-age">
+                        <span id="gender" class="selectable"></span> • 
+                        <span id="umur" class="selectable"></span> tahun
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Data Pribadi</h3>
+                    <div class="info-item">
+                        <label>Username:</label>
+                        <span id="username" class="selectable"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Email:</label>
+                        <span id="email" class="selectable"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Telepon:</label>
+                        <span id="telepon" class="selectable"></span>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h3>Keluarga</h3>
+                    <div class="info-item">
+                        <label>Ayah:</label>
+                        <span id="namaAyah" class="selectable"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Ibu:</label>
+                        <span id="namaIbu" class="selectable"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Status:</label>
+                        <span id="statusPernikahan" class="selectable"></span>
+                    </div>
+                    <div class="info-item" id="anakContainer">
+                        <label>Anak:</label>
+                        <div id="daftarAnak" class="anak-list"></div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h3>Pekerjaan & Alamat</h3>
+                    <div class="info-item">
+                        <label>Jabatan:</label>
+                        <span id="pekerjaan" class="selectable"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Tempat:</label>
+                        <span id="perusahaan" class="selectable"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Alamat:</label>
+                        <span id="alamat" class="selectable"></span>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h3>Media Sosial</h3>
+                    <div class="info-item">
+                        <label>Instagram:</label>
+                        <span id="instagram" class="selectable"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Twitter:</label>
+                        <span id="twitter" class="selectable"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>TikTok:</label>
+                        <span id="tiktok" class="selectable"></span>
+                    </div>
+                </div>
+
+                <div class="info-section credit-card">
+                    <h3>Kartu Kredit</h3>
+                    <div id="kartuKredit"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="js/generator.js"></script>
     <script>
         let isGenerating = false;
+        let isInitialized = false;
 
-        async function generateData() {
-            if (isGenerating) return;
-            
-            const btn = document.getElementById('generateBtn');
-            isGenerating = true;
-            btn.textContent = 'Generating...';
-            btn.disabled = true;
-
+        async function initialize() {
             try {
-                const data = await generateDataLengkap();
-                if (!data) return;
-                
-                document.getElementById('foto').src = data.foto || '';
-                document.getElementById('nama').textContent = data.nama;
-                document.getElementById('username').textContent = data.username;
-                document.getElementById('email').textContent = data.email;
-                document.getElementById('password').textContent = data.password;
-                document.getElementById('ip').textContent = data.ip;
-                document.getElementById('gender').textContent = data.jenisKelamin;
-                document.getElementById('alamat').textContent = data.alamat;
-                document.getElementById('telepon').textContent = data.telepon;
-                document.getElementById('perusahaan').textContent = data.perusahaan;
-                document.getElementById('pekerjaan').textContent = data.statusPekerjaan;
-                document.getElementById('kartuKredit').innerHTML = `
-                    <p>Bank: ${data.kartuKredit.bank}</p>
-                    <p>Nomor: ${data.kartuKredit.number}</p>
-                    <p>Expired: ${data.kartuKredit.expired}</p>
-                    <p>CVV: ${data.kartuKredit.cvv}</p>
-                `;
+                isInitialized = await initializeData();
+                if (!isInitialized) {
+                    throw new Error('Gagal menginisialisasi data');
+                }
+                await generateData();
             } catch (error) {
-                console.error('Error generating data:', error);
-            } finally {
-                isGenerating = false;
-                btn.textContent = 'Generate Data Baru';
-                btn.disabled = false;
+                console.error('Error initializing:', error);
+                alert('Gagal memuat data. Silakan refresh halaman.');
             }
         }
 
-        // Add selection handler
+        async function generateData() {
+            if (isGenerating || !isInitialized) return;
+            
+            const btn = document.getElementById('generateBtn');
+            const btnText = btn.querySelector('.btn-text');
+            const count = parseInt(document.getElementById('generateCount').value) || 1;
+            
+            if (count < 1 || count > 10) {
+                alert('Jumlah profil harus antara 1-10');
+                return;
+            }
+
+            btn.disabled = true;
+            isGenerating = true;
+            btnText.textContent = 'Generating...';
+            btn.classList.add('loading');
+
+            const container = document.getElementById('profiles-container');
+            container.innerHTML = '';
+
+            try {
+                for (let i = 0; i < count; i++) {
+                    const profileCard = await createProfileCard();
+                    if (profileCard) {
+                        container.appendChild(profileCard);
+                        await new Promise(resolve => setTimeout(resolve, 500));
+                    } else {
+                        throw new Error('Gagal membuat profil');
+                    }
+                }
+            } catch (error) {
+                console.error('Error generating profiles:', error);
+                alert('Terjadi kesalahan saat generate data. Silakan coba lagi.');
+            } finally {
+                btn.disabled = false;
+                isGenerating = false;
+                btnText.textContent = 'Generate Data';
+                btn.classList.remove('loading');
+            }
+        }
+
+        async function createProfileCard() {
+            try {
+                const template = document.getElementById('profile-template');
+                const card = template.content.cloneNode(true);
+                const profileCard = document.createElement('div');
+                profileCard.appendChild(card);
+                
+                const cardElement = profileCard.firstElementChild;
+                cardElement.classList.add('loading');
+
+                const data = await generateDataLengkap();
+                if (!data) {
+                    throw new Error('Gagal menghasilkan data');
+                }
+
+                await updateProfileCard(cardElement, data);
+                return cardElement;
+            } catch (error) {
+                console.error('Error creating profile card:', error);
+                return null;
+            }
+        }
+
+        async function updateProfileCard(card, data) {
+            try {
+                if (!card || !data) return;
+                
+                console.log('Updating card with data:', data); // Debugging
+
+                // Basic info
+                card.querySelector('#foto').src = data.foto || 'https://via.placeholder.com/150';
+                card.querySelector('#nama').textContent = data.nama || 'Nama tidak tersedia';
+                card.querySelector('#gender').textContent = data.jenisKelamin || 'Tidak tersedia';
+                card.querySelector('#umur').textContent = data.umur || '0';
+                
+                // More detailed info
+                card.querySelector('#username').textContent = data.username || 'Username tidak tersedia';
+                card.querySelector('#email').textContent = data.email || 'Email tidak tersedia';
+                card.querySelector('#telepon').textContent = data.telepon || 'Nomor tidak tersedia';
+                card.querySelector('#namaAyah').textContent = data.namaAyah || 'Nama ayah tidak tersedia';
+                card.querySelector('#namaIbu').textContent = data.namaIbu || 'Nama ibu tidak tersedia';
+                card.querySelector('#pekerjaan').textContent = data.statusPekerjaan || 'Pekerjaan tidak tersedia';
+                card.querySelector('#perusahaan').textContent = data.perusahaan || 'Perusahaan tidak tersedia';
+                card.querySelector('#alamat').textContent = data.alamat || 'Alamat tidak tersedia';
+
+                // Social media
+                if (data.socialMedia) {
+                    card.querySelector('#instagram').textContent = data.socialMedia.instagram || '@username';
+                    card.querySelector('#twitter').textContent = data.socialMedia.twitter || '@username';
+                    card.querySelector('#tiktok').textContent = data.socialMedia.tiktok || '@username';
+                }
+
+                // Credit card
+                const kartuKredit = card.querySelector('#kartuKredit');
+                if (kartuKredit && data.kartuKredit) {
+                    kartuKredit.innerHTML = `
+                        <p>Bank: ${data.kartuKredit.bank || 'N/A'}</p>
+                        <p>Nomor: ${data.kartuKredit.number || 'XXXX XXXX XXXX XXXX'}</p>
+                        <p>Expired: ${data.kartuKredit.expired || 'MM/YY'}</p>
+                        <p>CVV: ${data.kartuKredit.cvv || 'XXX'}</p>
+                    `;
+                }
+
+                // Update status pernikahan dan anak
+                card.querySelector('#statusPernikahan').textContent = data.statusPernikahan || 'Tidak tersedia';
+                
+                const daftarAnak = card.querySelector('#daftarAnak');
+                const anakContainer = card.querySelector('#anakContainer');
+                
+                if (data.jumlahAnak > 0 && data.anakAnak) {
+                    let anakHTML = `<p>${data.jumlahAnak} Anak:</p>`;
+                    data.anakAnak.forEach(anak => {
+                        anakHTML += `
+                            <div class="anak-item selectable">
+                                ${anak.nama} (${anak.umur} tahun, ${anak.jenisKelamin})
+                            </div>
+                        `;
+                    });
+                    daftarAnak.innerHTML = anakHTML;
+                    anakContainer.style.display = 'block';
+                } else {
+                    daftarAnak.innerHTML = '<span class="selectable">Belum memiliki anak</span>';
+                    anakContainer.style.display = data.statusPernikahan === 'Menikah' ? 'block' : 'none';
+                }
+
+                card.classList.remove('loading');
+            } catch (error) {
+                console.error('Error updating profile card:', error);
+                card.classList.remove('loading');
+            }
+        }
+
+        // Copy on double click handler
         document.addEventListener('dblclick', function(e) {
             if (e.target.classList.contains('selectable')) {
-                // Select the text
                 const range = document.createRange();
                 range.selectNodeContents(e.target);
-                const selection = window.getSelection();
-                selection.removeAllRanges();
-                selection.addRange(range);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
                 
-                // Add visual feedback
-                e.target.classList.add('selected');
-                setTimeout(() => {
-                    e.target.classList.remove('selected');
-                }, 500);
-
-                // Copy to clipboard
                 try {
                     document.execCommand('copy');
-                    // Optional: Show feedback that text was copied
-                    console.log('Copied to clipboard');
+                    e.target.classList.add('copied');
+                    setTimeout(() => e.target.classList.remove('copied'), 500);
                 } catch (err) {
-                    console.error('Failed to copy text');
+                    console.error('Failed to copy');
                 }
             }
         });
 
-        // Generate initial values
-        generateData();
+        // Initialize application
+        window.addEventListener('load', async () => {
+            await checkDataLoaded();
+            initialize();
+        });
     </script>
 </body>
 </html>
